@@ -14,15 +14,12 @@
   </testsuites>
   <php>
     <env name="APP_ENV" value="test" force="true"/>
-    <env name="KERNEL_CLASS" value="DoctrineTestingTools\DatabaseKernel"/>
+    <env name="KERNEL_CLASS" value="DoctrineTestingTools\AppKernel"/>
     <env name="DATABASE_URL" value="sqlite:///var/sqlite-unit-test.db"/>
   </php>
   <source>
     <include>
       <directory suffix=".php">src</directory>
     </include>
-    <exclude>
-      <directory suffix=".php">src/public</directory>
-    </exclude>
   </source>
 </phpunit>

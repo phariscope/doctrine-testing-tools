@@ -1,3 +1,0 @@
-#!/bin/sh
-
-bin/php vendor/bin/phpunit -c phpunit-integration.xml.dist --display-warnings --display-notices --display-deprecation $@

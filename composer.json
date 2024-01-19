@@ -1,8 +1,8 @@
 {
     "name": "phariscope/doctrine-testing-tools",
-    "type": "composer-plugin",
+    "type": "library",
     "description": "A PHP component to test Doctrine Repositories",
-    "keywords": ["doctrine", "unittests"],
+    "keywords": ["doctrine", "unit", "test"],
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -14,19 +14,19 @@
     "require": {
         "php": ">=8.1",
         "doctrine/orm": "^2.17",
+        "doctrine/doctrine-bundle": "^2.11",
         "symfony/http-kernel": "^7.0",
         "symfony/framework-bundle": "^7.0",
         "symfony/runtime": "^7.0",
         "symfony/yaml": "^7.0",
-        "doctrine/doctrine-bundle": "^2.11",
         "symfony/dotenv": "^7.0"
     },
     "require-dev": {
-        "infection/extension-installer": "0.1.2",
-        "infection/infection": "^0.27",
+        "phpunit/phpunit": "^10",
         "phpstan/phpdoc-parser": "^1.20",
         "phpstan/phpstan": "1.10.15",
-        "phpunit/phpunit": "^10",
+        "infection/extension-installer": "0.1.2",
+        "infection/infection": "^0.27",
         "squizlabs/php_codesniffer": "3.*"
     },
     "config": {
@@ -42,8 +42,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "DoctrineTestingTools\\Tests\\": "tests/unit",
-            "DoctrineTestingTools\\Integration\\": "tests/integration"
+            "DoctrineTestingTools\\Tests\\": "tests/unit"
         }
     }
 }
