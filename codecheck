@@ -1,0 +1,11 @@
+#!/bin/sh
+
+bin/php vendor/bin/phpcbf --ignore=src/Infrastructure/Web/Symfony/public --standard=PSR2 ./src ./tests
+bin/php vendor/bin/phpcs --ignore=src/Infrastructure/Web/Symfony/public --standard=PSR2 ./src ./tests
+
+bin/php vendor/bin/phpstan analyse --level=9 ./src
+bin/php vendor/bin/phpstan analyse --level=9 ./tests
+
+bin/qa local-php-security-checker composer.lock
+
+bin/phpunit --testsuite all --display-warnings --display-notices --display-deprecation
