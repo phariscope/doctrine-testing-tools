@@ -11,6 +11,9 @@ class ExempleRepositoryDoctrineTest extends ExempleRepositoryTestBase
 
     protected function createRepository(): void
     {
+        $this->initDoctrineTester();
+
+        $this->clearTables(["exemples"]);
         $this->repository = new ExempleRepositoryDoctrine($this->getEntityManager());
     }
 }

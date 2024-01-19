@@ -15,13 +15,7 @@ trait DoctrineRepositoryTesterTrait
     private Kernel $kernel;
     private Application $app;
 
-    public function __construct(string $name)
-    {
-        parent::__construct($name);
-        $this->initKernel();
-    }
-
-    private function initKernel()
+    private function initDoctrineTester()
     {
         $class = $this->getKernelClass();
         $this->kernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
@@ -64,14 +58,14 @@ trait DoctrineRepositoryTesterTrait
      */
     private function getKernelClass(): string
     {
-        if (!isset($_SERVER['KERNEL_CLASS']) && !isset($_ENV['KERNEL_CLASS'])) {
-            throw new \LogicException(sprintf('You must set the KERNEL_CLASS environment variable.', static::class));
+        if (!isset($_ENV['KERNEL_CLASS'])) {
+            throw new \LogicException('You must set the KERNEL_CLASS environment variable.');
         }
 
-        if (!class_exists($class = $_ENV['KERNEL_CLASS'] ?? $_SERVER['KERNEL_CLASS'])) {
+        if (!class_exists($class = $_ENV['KERNEL_CLASS'])) {
             throw new \RuntimeException(
                 sprintf(
-                    'Class "%s" doesn\'t exist or cannot be autoloaded. Check that the KERNEL_CLASS value.',
+                    'Class "%s" doesn\'t exist or cannot be autoloaded. Check the KERNEL_CLASS value.',
                     $class,
                     static::class
                 )
