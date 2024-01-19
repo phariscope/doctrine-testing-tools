@@ -29,12 +29,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Phariscope\\DoctrineTestingTools\\": "src/"
+            "DoctrineTestingTools\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DatamapsPHP\\Tests\\": "tests/unit"
+            "DoctrineTestingTools\\Tests\\": "tests/unit",
+            "DoctrineTestingTools\\Integration\\": "tests/integration"
         }
     }
 }
