@@ -4,6 +4,7 @@ namespace DoctrineTestingTools\Infrastructure;
 
 use DoctrineTestingTools\Domain\Exemple;
 use DoctrineTestingTools\Domain\ExempleId;
+use DoctrineTestingTools\Domain\ExempleNotFoundException;
 use DoctrineTestingTools\Domain\ExempleRepositoryInterface;
 
 class ExempleRepositoryInMemory implements ExempleRepositoryInterface
@@ -16,8 +17,12 @@ class ExempleRepositoryInMemory implements ExempleRepositoryInterface
         $this->exemples[$exemple->getExempleId()->getId()] = $exemple;
     }
 
+    /** @throws ExempleNotFoundException */
     public function findById(ExempleId $exempleId): Exemple
     {
-        return $this->exemples[$exempleId->getId()];
+        if (key_exists($exempleId->getId(), $this->exemples)) {
+            return $this->exemples[$exempleId->getId()];
+        }
+        throw new ExempleNotFoundException();
     }
 }
