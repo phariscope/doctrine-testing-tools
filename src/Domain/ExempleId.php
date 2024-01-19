@@ -25,4 +25,9 @@ class ExempleId
     {
         return $this->getId() == $other->getId();
     }
+
+    public function __toString(): string
+    {
+        return $this->getId();
+    }
 }

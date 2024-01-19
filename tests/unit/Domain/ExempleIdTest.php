@@ -36,4 +36,10 @@ class ExempleIdTest extends TestCase
         $this->assertTrue($id1->equals($id2));
         $this->assertFalse($id1->equals($id3));
     }
+
+    public function testToString(): void
+    {
+        $id = new ExempleId("stringCast");
+        $this->assertEquals("stringCast", (string) $id);
+    }
 }
