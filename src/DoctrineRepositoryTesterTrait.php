@@ -44,12 +44,7 @@ trait DoctrineRepositoryTesterTrait
 
     private function runCommand(string $command): void
     {
-        $class = $this->getKernelClass();
-        $kernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
-
-        $app = new Application($kernel);
-        $app->setAutoExit(false);
-        $app->run(new StringInput($command . ' --quiet'));
+        $this->app->run(new StringInput(sprintf('%s --quiet', $command)));
     }
 
     /**
