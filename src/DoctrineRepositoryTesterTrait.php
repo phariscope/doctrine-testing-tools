@@ -12,23 +12,23 @@ trait DoctrineRepositoryTesterTrait
     private const KERNEL_ENV = "test";
     private const KERNEL_DEBUG_VALUE = false;
 
-    private Kernel $kernel;
+    private Kernel $myKernel;
     private Application $app;
 
     private function initDoctrineTester()
     {
         $class = $this->getDefaultKernelClass();
-        $this->kernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
-        $this->kernel->boot();
+        $this->myKernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
+        $this->myKernel->boot();
 
-        $this->app = new Application($this->kernel);
+        $this->app = new Application($this->myKernel);
         $this->app->setAutoExit(false);
     }
 
     private function getEntityManager(): EntityManagerInterface
     {
         /** @var EntityManagerInterface $em */
-        $em = $this->kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->myKernel->getContainer()->get('doctrine.orm.entity_manager');
         return $em;
     }
 

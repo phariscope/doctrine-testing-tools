@@ -29,8 +29,8 @@ class DoctrineRepositoryTesterTraitTest extends TestCase
 
     public function testKernel(): void
     {
-        $this->assertEquals("test", $this->kernel->getEnvironment());
-        $this->assertEquals(false, $this->kernel->isDebug());
+        $this->assertEquals("test", $this->myKernel->getEnvironment());
+        $this->assertEquals(false, $this->myKernel->isDebug());
     }
 
     public function testGetEntityManager(): void
