@@ -17,7 +17,7 @@ trait DoctrineRepositoryTesterTrait
 
     private function initDoctrineTester()
     {
-        $class = $this->getKernelClass();
+        $class = $this->getDefaultKernelClass();
         $this->kernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
         $this->kernel->boot();
 
@@ -39,7 +39,7 @@ trait DoctrineRepositoryTesterTrait
         foreach ($tables as $table) {
             $this->runCommand(sprintf('doctrine:query:sql "DROP TABLE IF EXISTS %s"', $table));
         }
-        $this->runCommand('doctrine:schema:update --complete --force --dump-sql');
+        $this->runCommand('doctrine:schema:update --complete --force');
     }
 
     private function runCommand(string $command): void
@@ -51,7 +51,7 @@ trait DoctrineRepositoryTesterTrait
      * @throws \RuntimeException
      * @throws \LogicException
      */
-    private function getKernelClass(): string
+    private function getDefaultKernelClass(): string
     {
         if (!isset($_ENV['KERNEL_CLASS'])) {
             throw new \LogicException('You must set the KERNEL_CLASS environment variable.');
