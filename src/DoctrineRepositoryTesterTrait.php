@@ -42,6 +42,22 @@ trait DoctrineRepositoryTesterTrait
         $this->runCommand('doctrine:schema:update --complete --force');
     }
 
+    private function resetDatabase(): void
+    {
+        if (!isset($_ENV['APP_ENV'])) {
+            throw new \LogicException('You must set the APP_ENV environment variable.');
+        }
+
+        if ($_ENV["APP_ENV"] == "test" || $_ENV["APP_ENV"] == "dev") {
+            $this->runCommand('doctrine:database:drop --force');
+            $this->runCommand('doctrine:schema:create');
+        } else {
+            throw new ShouldNotDropDatabaseInProdException(
+                sprintf("You should not drop the database when in '%s' environment", $_ENV["APP_ENV"])
+            );
+        }
+    }
+
     private function runCommand(string $command): void
     {
         $this->app->run(new StringInput(sprintf('%s --quiet', $command)));
