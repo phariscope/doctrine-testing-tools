@@ -6,4 +6,6 @@ bin/php vendor/bin/phpcs --ignore=src/Infrastructure/Web/Symfony/public --standa
 bin/php vendor/bin/phpstan analyse --level=9 ./src
 bin/php vendor/bin/phpstan analyse --level=9 ./tests
 
+bin/local-php-security-checker composer.lock
+
 bin/phpunit --testsuite all --display-warnings --display-notices --display-deprecation

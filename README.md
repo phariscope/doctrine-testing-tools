@@ -17,10 +17,10 @@ Look into the **ExempleRepositoryDoctrine** if you need an exemple.
 ## Install
 
 ```shell
-composer require phariscope/doctrine-testing-tools
+composer require --dev phariscope/doctrine-testing-tools
 ```
 
-## To contribute to Datamaps PHP
+## To contribute to Doctrine Testing Tools
 ### Requirements:
 * docker
 * git

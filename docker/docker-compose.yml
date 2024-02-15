@@ -1,7 +1,7 @@
 services:
-  datamaps-php:
-    container_name: "datamaps-php"
-    image: datamaps-php:latest
+  dtt-php:
+    container_name: "dtt-php"
+    image: dtt-php:latest
     build:
       context: .
       dockerfile: php/Dockerfile
@@ -9,22 +9,21 @@ services:
         - latest
     user: 1000:1000
     volumes:
-      - ../../log:/var/datamaps/log
-      - "$PWD/..:/var/datamaps"
+      - "$PWD/..:/var/dtt"
       - "$PWD/..:$PWD/.."
     working_dir: $PWD/..
     networks:
-      - datamaps-network
+      - dtt-network
 
 networks:
-  datamaps-network:
+  dtt-network:
     driver: bridge
-    name: datamaps-network
+    name: dtt-network
     enable_ipv6: true
     ipam:
       config:
-        - subnet: fd00:1:20::/112
-          gateway: fd00:1:20::1
+        - subnet: fd00:2:20::/112
+          gateway: fd00:2:20::1
 
 volumes:
-  datamaps-db:
+  dtt-db:
