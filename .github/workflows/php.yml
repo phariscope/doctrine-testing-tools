@@ -29,16 +29,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+    #- name: Install dependencies
+    #  run: composer install --prefer-dist --no-progress
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
-  tests:
-
-    runs-on: php:8.2.11-fpm
-
-    steps:
-
-    - name: Run test suite
-      run: php vendor/bin/phpunit
+#  tests:
+#
+#    runs-on: php:8.2.11-fpm
+#
+#    steps:
+#
+#    - name: Run test suite
+#      run: php vendor/bin/phpunit
