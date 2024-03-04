@@ -35,9 +35,10 @@ trait DoctrineRepositoryTesterTrait
     /** @param array<string> $tables */
     private function clearTables(array $tables): void
     {
+        $em = $this->getEntityManager();
         /** @var string $table */
         foreach ($tables as $table) {
-            $this->runCommand(sprintf('doctrine:query:sql "DROP TABLE IF EXISTS %s"', $table));
+            $em->getConnection()->executeStatement(sprintf('DROP TABLE IF EXISTS %s;', $table));
         }
         $this->runCommand('doctrine:schema:update --complete --force');
     }
