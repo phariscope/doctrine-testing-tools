@@ -51,6 +51,7 @@ trait DoctrineRepositoryTesterTrait
 
         if ($_ENV["APP_ENV"] == "test" || $_ENV["APP_ENV"] == "dev") {
             $this->runCommand('doctrine:database:drop --force');
+            $this->runCommand('doctrine:database:create');
             $this->runCommand('doctrine:schema:create');
         } else {
             throw new ShouldNotDropDatabaseInProdException(
