@@ -40,7 +40,7 @@ trait DoctrineRepositoryTesterTrait
         foreach ($tables as $table) {
             $em->getConnection()->executeStatement(sprintf('DROP TABLE IF EXISTS %s;', $table));
         }
-        $this->runCommand('doctrine:schema:update --complete --force');
+        $this->runCommand('doctrine:schema:update --force');
     }
 
     private function resetDatabase(): void
