@@ -12,7 +12,6 @@ class ExempleTest extends TestCase
     {
         $exemple = new Exemple();
         $exempleId = $exemple->getExempleId();
-        $this->assertIsString($exempleId->getId());
         $this->assertNotEmpty($exempleId->getId());
 
         $identitifedExemple = new Exemple(new ExempleId("identity"));

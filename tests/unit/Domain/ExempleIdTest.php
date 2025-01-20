@@ -10,7 +10,6 @@ class ExempleIdTest extends TestCase
     public function testCreation(): void
     {
         $exempleId = new ExempleId();
-        $this->assertIsString($exempleId->getId());
         $this->assertNotEmpty($exempleId->getId());
     }
 

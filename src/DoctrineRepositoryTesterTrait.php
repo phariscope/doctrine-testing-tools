@@ -15,11 +15,15 @@ trait DoctrineRepositoryTesterTrait
     private Kernel $myKernel;
     private Application $app;
 
-    private function initDoctrineTester()
+    private function initDoctrineTester(): void
     {
         $class = $this->getDefaultKernelClass();
-        $this->myKernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
-        $this->myKernel->boot();
+        /** @var object&Kernel $myKernel */
+        // @phpstan-ignore-next-line no easy way to make phpstan understand this
+        $myKernel = new $class(self::KERNEL_ENV, self::KERNEL_DEBUG_VALUE);
+        
+        $myKernel->boot();
+        $this->myKernel = $myKernel;
 
         $this->app = new Application($this->myKernel);
         $this->app->setAutoExit(false);
@@ -45,17 +49,20 @@ trait DoctrineRepositoryTesterTrait
 
     private function resetDatabase(): void
     {
-        if (!isset($_ENV['APP_ENV'])) {
+        /** @var array<string,string> $_ENV */
+        if (!isset($_ENV['APP_ENV']) || !is_string($_ENV['APP_ENV'])) {
             throw new \LogicException('You must set the APP_ENV environment variable.');
         }
+        /** @var string $appEnv */
+        $appEnv = $_ENV["APP_ENV"];
 
-        if ($_ENV["APP_ENV"] == "test" || $_ENV["APP_ENV"] == "dev") {
+        if ($appEnv == "test" || $appEnv == "dev") {
             $this->runCommand('doctrine:database:drop --force');
             $this->runCommand('doctrine:database:create');
             $this->runCommand('doctrine:schema:create');
         } else {
             throw new ShouldNotDropDatabaseInProdException(
-                sprintf("You should not drop the database when in '%s' environment", $_ENV["APP_ENV"])
+                sprintf("You should not drop the database when in '%s' environment", $appEnv)
             );
         }
     }
@@ -71,7 +78,7 @@ trait DoctrineRepositoryTesterTrait
      */
     private function getDefaultKernelClass(): string
     {
-        if (!isset($_ENV['KERNEL_CLASS'])) {
+        if (!isset($_ENV['KERNEL_CLASS']) || !is_string($_ENV['KERNEL_CLASS'])) {
             throw new \LogicException('You must set the KERNEL_CLASS environment variable.');
         }
 
@@ -79,8 +86,7 @@ trait DoctrineRepositoryTesterTrait
             throw new \RuntimeException(
                 sprintf(
                     'Class "%s" doesn\'t exist or cannot be autoloaded. Check the KERNEL_CLASS value.',
-                    $class,
-                    static::class
+                    $class
                 )
             );
         }

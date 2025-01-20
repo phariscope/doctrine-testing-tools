@@ -7,4 +7,4 @@ bin/php vendor/bin/phpstan analyse
 
 bin/local-php-security-checker composer.lock
 
-bin/phpunit --testsuite all --display-warnings --display-notices --display-deprecation
+bin/phpunit --testsuite all --display-deprecation

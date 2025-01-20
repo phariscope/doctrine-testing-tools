@@ -20,8 +20,12 @@ class DoctrineRepositoryTesterTraitTest extends TestCase
 
     public function setUp(): void
     {
-        $this->envKernelClass = $_ENV["KERNEL_CLASS"];
-        $this->envAppEnv = $_ENV["APP_ENV"];
+        /** @var string $kernelClass */
+        $kernelClass = $_ENV["KERNEL_CLASS"];
+        /** @var string $appEnv */
+        $appEnv = $_ENV["APP_ENV"];
+        $this->envKernelClass = $kernelClass;
+        $this->envAppEnv = $appEnv;
         $this->initDoctrineTester();
         $this->resetDatabase();
     }
