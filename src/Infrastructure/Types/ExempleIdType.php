@@ -27,7 +27,7 @@ class ExempleIdType extends Type
         return new ExempleId($value);
     }
 
-    /** @param array<mixed> $column */
+    /** @param array<string,mixed> $column */
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getGuidTypeDeclarationSQL($column);
